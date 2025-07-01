@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бекдаулет, 21 жасыңмен!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            text-align: center;
+            animation: gradientBG 15s ease infinite;
+            overflow-y: auto; /* Скролл қосу */
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 90%; /* Экраның еніне бейімдеу */
+            margin: 20px auto;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden; /* Контейнер ішіндегі асып кетулерді болдырмау */
+        }
+        
+        h1 {
+            color: #ffd700;
+            font-size: 2.5em; /* Кішірейту */
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: glow 2s infinite alternate;
+            word-wrap: break-word; /* Ұзын сөздерді сындыру */
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ffd700; }
+            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ff8c00; }
+        }
+        
+        p {
+            font-size: 1.1em; /* Кішірейту */
+            line-height: 1.6;
+            margin-bottom: 20px;
+            word-wrap: break-word; /* Ұзын сөздерді сындыру */
+        }
+        
+        .photo {
+            width: 150px; /* Кішірейту */
+            height: 150px; /* Кішірейту */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ffd700;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transition: transform 0.5s;
+        }
+        .photo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            color: white;
+            border: none;
+            padding: 12px 25px; /* Кішірейту */
+            border-radius: 50px;
+            font-size: 1em; /* Кішірейту */
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: inline-block; /* Кнопканың ұзындығын реттеу */
+            white-space: nowrap; /* Текстті сындырмау */
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .countdown {
+            font-size: 1.3em; /* Кішірейту */
+            margin: 15px 0;
+            color: #ffd700;
+            font-weight: bold;
+            word-wrap: break-word; /* Ұзын сөздерді сындыру */
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Киіндіру үшін медиа-запрос */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                width: 95%;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .photo {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Қайрат Нұртастың "Туған күн" әуені -->
+    <audio id="partyMusic" loop>
+        <source src="kairat-nurtas---tugan-kun_(mp3xit.net).mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="music-control" onclick="toggleMusic()">
+        <span style="color: white; font-size: 24px;">🔊</span>
+    </div>
+    
+    <div class="container">
+        <img src="bek.jpg" alt="Бекдаулеттің суреті" class="photo" id="photo">
+        <h1 id="name">Бекдаулет, 21 жасыңмен! 🎉</h1>
+        
+        <div class="countdown" id="countdown"></div>
+        
+        <p id="message">
+            21 жасың құтты болсын, бауырым!<br><br>
+            Бұл жас – нағыз жігіттікке аяқ басқан, арман мен мақсаттың нақты бағытқа бет алған шағы.<br>
+            Сенің алда талай белестерді бағындыратыныңа сенемін. Ақылың мен парасатың, табандылығың мен еңбекқорлығың сені алысқа жетелей берсін.<br><br>
+            Дос ретінде сені әрқашан құрметтеймін, сенімді тірек, ақылдасар ағадай, бауырдай болғаның үшін алғысым шексіз.<br>
+            Денсаулығың мықты, ниетің түзу, жолың ашық болсын!<br>
+            Қай жерде жүрсең де елдің ықыласына бөленіп, арманыңа қадам сайын жақындай бер!
+        </p>
+        
+        <button class="btn" onclick="startCelebration()">Сюрприз! 🎁</button>
+    </div>
+
+    <script>
+        // Музыканы басқару
+        const music = document.getElementById('partyMusic');
+        let isPlaying = false;
+        
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                document.querySelector('.music-control span').textContent = '🔇';
+            } else {
+                music.play();
+                document.querySelector('.music-control span').textContent = '🔊';
+            }
+            isPlaying = !isPlaying;
+        }
+        
+        // Автоплейді тек бірінші басқанда ғана қосу
+        document.addEventListener('click', function initMusic() {
+            music.play().then(() => {
+                isPlaying = true;
+                document.querySelector('.music-control span').textContent = '🔊';
+            }).catch(e => {
+                console.log("Автоплей блокталған");
+            });
+            document.removeEventListener('click', initMusic);
+        }, { once: true });
+
+        // Таймер (8 шілдеге дейін)
+        function updateCountdown() {
+            const now = new Date();
+            const targetDate = new Date(now.getFullYear(), 6, 8);
+            
+            if (now.getMonth() > 6 || (now.getMonth() === 6 && now.getDate() > 8)) {
+                targetDate.setFullYear(targetDate.getFullYear() + 1);
+            }
+            
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = "Бүгін Бекдаулеттің 21 жасқа толу күні! 🎉";
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').innerHTML = `
+                21 жасқа толуына:<br>${days} күн ${hours} сағат ${minutes} минут қалды!
+            `;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Сюрприз функциясы (конфетти және музыка)
+        function startCelebration() {
+            // Музыканы қосу
+            if (music.paused) {
+                music.play();
+                isPlaying = true;
+                document.querySelector('.music-control span').textContent = '🔊';
+            }
+            
+            // Конфетти эффектісі
+            startConfetti();
+        }
+        
+        // Конфетти функциясы
+        function startConfetti() {
+            const colors = ['#ff0', '#f0f', '#0ff', '#f00', '#0f0', '#00f', '#ff8c00', '#ff1493'];
+            const container = document.body;
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.opacity = 1;
+                container.appendChild(confetti);
+
+                const animationDuration = Math.random() * 3 + 2;
+
+                confetti.animate([
+                    { top: '-10px', transform: 'rotate(0deg)', opacity: 1 },
+                    { top: '100vh', transform: 'rotate(360deg)', opacity: 0 }
+                ], {
+                    duration: animationDuration * 1000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)',
+                    fill: 'forwards'
+                });
+
+                setTimeout(() => confetti.remove(), animationDuration * 1000);
+            }
+        }
+    </script>
+</body>
+</html>
